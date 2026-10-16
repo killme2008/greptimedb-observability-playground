@@ -4,7 +4,7 @@
 #   docker compose -f compose.yaml -f greptime/compose.greptime.yaml up -d
 services:
   greptimedb:
-    image: greptime/greptimedb:v1.2.0
+    image: greptime/greptimedb:v1.3.0-beta.2
     container_name: greptimedb
     command:
       - standalone
@@ -13,6 +13,8 @@ services:
       - --grpc-bind-addr=0.0.0.0:4001
       - --mysql-addr=0.0.0.0:4002
       - --postgres-addr=0.0.0.0:4003
+    environment:
+      - GREPTIMEDB_STANDALONE__OTLP__EXPERIMENTAL_ENABLE_RESOURCE_INFO=true
     ports:
       - "4000:4000"
       - "4001:4001"
